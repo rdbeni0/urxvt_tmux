@@ -8,7 +8,7 @@ design goals:
 * **\`** as leader key for tmux
 * avoiding conflicts with default keybindings of **emacs** and **vim** 
 * extented mouse support
-* effective usage on the Lenovo Thinkpad keyboards
+* effective usage on the Lenovo ThinkPad keyboards  
 
 urxvt:  
 * all plugins are declared via **URxvt.perl-ext-common:**  
