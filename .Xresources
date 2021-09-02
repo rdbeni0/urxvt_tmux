@@ -1,0 +1,105 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! experiments with font:
+! https://wiki.gentoo.org/wiki/Rxvt-unicode#Font
+Xft.dpi:                    96
+Xft.antialias:              true
+! Xft.rgba:                   none
+Xft.hinting:                true
+Xft.hintstyle:              hintfull
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! https://unix.stackexchange.com/questions/444773/how-to-disable-the-ctrlshift-binding-iso-14755-in-urxvt
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! icons:
+! https://bbs.archlinux.org/viewtopic.php?id=63197
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! https://morfikov.github.io/post/konfiguracja-terminala-urxvt/
+URxvt*scrollBar: false
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+URxvt.perl-ext-common:  default,font-size,selection-to-clipboard,clipboard-paste-on-right-click
+URxvt.clipboard.autocopy: true
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! optional:
+! URxvt.font: xft:DejaVu Sans Mono:size=13
+! URxvt.font: xft:Liberation Mono:Regular:size=13
+
+URxvt*font: xft:FantasqueSansMono-Regular:pixelsize=22:antialias=true
+URxvt*boldFont: xft:FantasqueSansMono-Bold:pixelsize=22:antialias=true
+URxvt*italicFont: xft:FantasqueSansMono-Italic:pixelsize=22:antialias=true
+
+URxvt.letterSpace: -1
+URxvt.lineSpace: 0
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! https://unix.stackexchange.com/questions/294337/rebinding-ctrl-alt-cv-to-ctrl-shift-cv-in-urxvt-9-20
+! keybindings
+URxvt.keysym.C-S-K:  font-size:increase
+URxvt.keysym.C-S-J:  font-size:decrease
+URxvt.keysym.C-S-H:  font-size:reset
+URxvt.keysym.C-S-L:  font-size:show
+URxvt.keysym.C-S-V:  eval:paste_clipboard
+URxvt.keysym.C-S-C:  eval:selection_to_clipboard
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! foreground/background is the most important:
+Rxvt*background: black
+Rxvt*foreground: white
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! example: pretty theme: https://github.com/AntSunrise/URxvt-themes/blob/master/pretty
+! color picker: https://htmlcolorcodes.com/color-picker/
+!
+! black
+URxvt.color0  : #000000
+URxvt.color8  : #555555
+
+! red
+urxvt*color1  : #FA0E0E
+! URxvt.color1: #AA0000
+! URxvt*color1: #FF0F0F
+! URxvt*color1: #FF5151
+URxvt.color9  : #FF8D8D
+! URxvt.color9  : #FF5555
+
+! green
+URxvt.color2  : #0CD30C
+!URxvt.color2 : #00AA00
+URxvt.color10 : #86FF86
+! 55FF55
+
+! yellow
+urxvt.color3  : #FFCA00
+!urxvt.color3  : #AB4400
+URxvt.color11 : #FFFF44
+
+! blue
+URxvt.color4  : #2A7EE2 
+! 2E86F0
+! URxvt.color4  :  0000AA
+URxvt.color12 : #74BFF3
+! URxvt.color12 : 5555FF
+
+! magenta
+URxvt.color5  : #D855E6
+! AA00AA
+URxvt.color13 : #FF79FF
+! FF55FF
+
+! cyan
+URxvt.color6  : #4EF7F7
+! #00AAAA
+URxvt.color14 : #CFFFFF
+! #55FFFF
+
+! white
+URxvt.color7  : #AAAAAA
+URxvt.color15 : #FFFFFF
