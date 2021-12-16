@@ -60,7 +60,7 @@ URxvt.keysym.C-S-L:  font-size:show
 ! so "clipboard" is old extension, but useful - use it here:
 
 ! optional - xsel :
-! URxvt.clipboard.copycmd:  xsel -ib
+! URxvt.clipboard.copyycmd:  xsel -ib
 ! URxvt.clipboard.pastecmd: xsel -ob
 
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
