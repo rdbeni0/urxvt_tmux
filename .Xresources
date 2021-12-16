@@ -67,8 +67,9 @@ URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 
 URxvt.keysym.C-S-V:  perl:clipboard:paste
-URxvt.keysym.C-v:  perl:clipboard:paste
 URxvt.keysym.C-S-C:  perl:clipboard:copy
+! Ctrl-v as copy : don't use it, conflict with vim/emacs:
+! URxvt.keysym.C-v:  perl:clipboard:paste
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! foreground/background is the most important:
