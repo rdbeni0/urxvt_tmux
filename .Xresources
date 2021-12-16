@@ -24,7 +24,7 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-URxvt.perl-ext-common:  default,font-size,selection-to-clipboard,clipboard-paste-on-right-click
+URxvt.perl-ext-common:  default,font-size,selection-to-clipboard,clipboard-paste-on-right-click,clipboard
 URxvt.clipboard.autocopy: true
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -41,13 +41,34 @@ URxvt.lineSpace: 0
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! https://unix.stackexchange.com/questions/294337/rebinding-ctrl-alt-cv-to-ctrl-shift-cv-in-urxvt-9-20
-! keybindings
+
+!! fonts - keybindings:
 URxvt.keysym.C-S-K:  font-size:increase
 URxvt.keysym.C-S-J:  font-size:decrease
 URxvt.keysym.C-S-H:  font-size:reset
 URxvt.keysym.C-S-L:  font-size:show
-URxvt.keysym.C-S-V:  eval:paste_clipboard
-URxvt.keysym.C-S-C:  eval:selection_to_clipboard
+
+
+!! copy/paste:
+
+! https://github.com/muennich/urxvt-perls/tree/master/deprecated
+! "Since version 9.20 rxvt-unicode natively supports copying to and pasting from the CLIPBOARD buffer with the Ctrl-Meta-c and Ctrl-Meta-v key bindings."
+! Since version 9.20 - but still with some bugs:
+! URxvt.keysym.C-S-V:  eval:paste_clipboard
+! URxvt.keysym.C-S-C:  eval:selection_to_clipboard
+
+! so "clipboard" is old extension, but useful - use it here:
+
+! optional - xsel :
+! URxvt.clipboard.copycmd:  xsel -ib
+! URxvt.clipboard.pastecmd: xsel -ob
+
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
+URxvt.keysym.C-S-V:  perl:clipboard:paste
+URxvt.keysym.C-v:  perl:clipboard:paste
+URxvt.keysym.C-S-C:  perl:clipboard:copy
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! foreground/background is the most important:
