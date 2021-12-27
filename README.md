@@ -23,6 +23,6 @@ dependencies:
 * xclip  
 * OPTIONAL: add in your **~/.zshrc** or **~/.bashrc** :
 ```
-if [[ $TERM == 'rxvt-unicode-256color' && -z "$TMUX" ]]; then exec tmux -f $HOME/.tmux/.tmux.conf; fi
+if [[ $TERM == 'rxvt-unicode-256color' && -z "$TMUX" ]]; then exec tmux -f $HOME/.tmux/tmux.conf; fi
 ```
 https://unix.stackexchange.com/questions/43601/how-can-i-set-my-default-shell-to-start-up-tmux
