@@ -33,10 +33,13 @@ set -s default-terminal screen-256color
 # custom plugin list: https://github.com/tmux-plugins/tpm/blob/master/docs/tpm_not_working.md
 set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
-  tmux-plugins/tmux-yank       \
   tmux-plugins/tmux-better-mouse-mode \
 '
-set -g @yank_action 'copy-pipe' #or 'copy-pipe-and-cancel' for the default
+
+## old @tpm_plugins plugins: 
+## tmux-plugins/tmux-yank       \ #not working anymoer!
+
+#set -g @yank_action 'copy-pipe' #or 'copy-pipe-and-cancel' for the default
 set -g @yank_selection_mouse 'clipboard' #or 'primary' or 'secondary'
 ################# keys
 bind-key -T root S-Down new-window
