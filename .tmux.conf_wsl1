@@ -27,22 +27,17 @@ setw -g window-status-current-style fg=black,bg=white
 
 # history
 set -g history-limit 10000
-
 # default $TERM env variable
 set -s default-terminal screen-256color
-
 ################# plugins
 # custom plugin list: https://github.com/tmux-plugins/tpm/blob/master/docs/tpm_not_working.md
 set -g @tpm_plugins '          \
   tmux-plugins/tpm             \
+  tmux-plugins/tmux-yank       \
   tmux-plugins/tmux-better-mouse-mode \
 '
-
-## old @tpm_plugins plugins: 
-## tmux-plugins/tmux-yank       \ #not working anymoer!
-
+set -g @yank_action 'copy-pipe' #or 'copy-pipe-and-cancel' for the default
 set -g @yank_selection_mouse 'clipboard' #or 'primary' or 'secondary'
-
 ################# keys
 bind-key -T root S-Down new-window
 bind-key -T root S-Left previous-window
@@ -50,7 +45,7 @@ bind-key -T root S-Right next-window
 bind-key -T root S-Up kill-window
 bind-key "A" kill-window
 
-# KILL SESSION:
+# kill session:
 # https://unix.stackexchange.com/questions/58588/kill-a-tmux-session-and-select-another-tmux-session
 #
 #bind-key a confirm-before -p "Kill #S (y/n)?" "run-shell 'tmux switch-client -n \\\; kill-session -t \"#S\"'"
@@ -61,13 +56,20 @@ bind-key "a" run-shell 'tmux switch-client -n \; kill-session -t "#S"'
 # https://unix.stackexchange.com/questions/318281/how-to-copy-and-paste-with-a-mouse-with-tmux
 set -g mouse on
 
-# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
-set -s escape-time 50
-
 # mouse wheels
 #bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
 #bind -n WheelDownPane select-pane -t= \; send-keys -M
 #bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
+
+# Use vim keybindings in copy mode
+setw -g mode-keys vi
+bind-key "q" copy-mode
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+bind-key -T copy-mode-vi 'p' run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+# unbind-key [
+
 # escape time
 # https://stackoverflow.com/questions/12312178/tmux-and-vim-escape-key-being-seen-as-and-having-long-delay/13843382#13843382
 set -s escape-time 0
@@ -78,38 +80,28 @@ bind-key -T copy-mode-vi 'Home' send -X start-of-line
 unbind-key -T copy-mode-vi 'End'
 bind-key -T copy-mode-vi 'End' send -X end-of-line
 
-############################################################ Clipboard integration
-# Use vim keybindings in copy mode (and via mouse):
-setw -g mode-keys vi
-bind-key "q" copy-mode
-bind-key -T copy-mode-vi 'v' send -X begin-selection
-bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xsel --clipboard -i" #xclip: "xclip -selection c"
-bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
-bind-key -T copy-mode-vi 'p' run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
-bind-key -T copy-mode-vi C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
-# unbind-key [
-
-# Update default binding of `Enter` to also use copy-pipe-and-cancel
+# Update default binding of `Enter` to also use copy-pipe
 unbind -T copy-mode-vi Enter
 
 # better to use xsel here: https://wiki.archlinux.org/title/Tmux#X_clipboard_integration
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel --clipboard -i" #xclip: "xclip -selection c"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xsel --clipboard -i" #xclip: "xclip -in -selection clipboard"
 
+## Clipboard integration
 # via: https://gist.github.com/rodricels/7951c3bd505d343b07309b76188af9b3
-# "CTRL+c" to send to clipboard (copy)
-bind-key -T copy-mode-vi C-c send-keys -X copy-pipe-and-cancel "xsel --clipboard -i" #xclip: "xclip -selection c"
+# CTRL+c to send to clipboard (copy)
 bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"
-
-# "p" or "CTRL+v" to paste from clipboard (paste)
-#unbind-key -T copy-mode-vi C-v
+# CTRL+v to paste from clipboard (paste)
 bind C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
 bind p run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+
+# Lower escape timing from 500ms to 50ms for quicker response to scroll-buffer access.
+set -s escape-time 50
+
 # mouse right click paste:
 unbind-key MouseDown3Pane
 bind-key -n MouseDown3Pane run "tmux set-buffer \"$(xclip -o -sel clipboard)\""
 # ^ alternative option, try it via xsel: bind-key -n MouseDown3Pane run "tmux set-buffer \"$(xsel --clipboard)\""
-
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
