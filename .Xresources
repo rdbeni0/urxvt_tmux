@@ -32,9 +32,9 @@ URxvt.clipboard.autocopy: true
 ! URxvt.font: xft:DejaVu Sans Mono:size=13
 ! URxvt.font: xft:Liberation Mono:Regular:size=13
 
-URxvt*font: xft:FantasqueSansMono-Regular:pixelsize=26:antialias=true
-URxvt*boldFont: xft:FantasqueSansMono-Bold:pixelsize=26:antialias=true
-URxvt*italicFont: xft:FantasqueSansMono-Italic:pixelsize=26:antialias=true
+URxvt*font: xft:FantasqueSansMono-Regular:pixelsize=24:antialias=true
+URxvt*boldFont: xft:FantasqueSansMono-Bold:pixelsize=24:antialias=true
+URxvt*italicFont: xft:FantasqueSansMono-Italic:pixelsize=24:antialias=true
 
 URxvt.letterSpace: -1
 URxvt.lineSpace: 0
