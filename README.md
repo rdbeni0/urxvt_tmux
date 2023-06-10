@@ -5,7 +5,7 @@ My urxvt+tmux configuration
 design goals:  
 * smoothly working on WSL and Linux    
 * **Control+Shift** as leader keys for URxvt
-* \` ` as leader key for tmux
+* `  as leader key for tmux
 * avoiding conflicts with default keybindings of **emacs** and **vim** 
 * extented mouse support
 * effective usage on the Lenovo ThinkPad keyboards  
